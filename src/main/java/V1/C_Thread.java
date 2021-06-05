@@ -10,12 +10,6 @@ public class C_Thread extends Thread{
 
     public synchronized void run(){
 
-        try {
-            wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         foo.third();
 
     }
