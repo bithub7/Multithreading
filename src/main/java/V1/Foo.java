@@ -5,42 +5,34 @@ public class Foo {
     private boolean second_bool = false;
     private boolean third_bool = false;
 
-    public synchronized void first() {
+    public  void first() {
 
         System.out.println("first");
 
         second_bool = true;
-
-        notifyAll();
     }
 
-    public synchronized void second() {
-        try {
-            while(!second_bool) {
-                wait();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public void second() {
+
+        while (!second_bool) {
+            Thread.yield();
         }
+
         System.out.println("second");
 
         second_bool = false;
         third_bool = true;
-
-        notifyAll();
     }
 
-    public synchronized void third() {
-        try {
-            while(!third_bool) {
-                wait();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public void third() {
+
+        while(!third_bool) {
+            Thread.yield();
         }
 
-        third_bool = false;
         System.out.println("third");
+
+        third_bool = false;
     }
 }
 
